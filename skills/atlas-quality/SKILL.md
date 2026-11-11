@@ -1,6 +1,6 @@
 ---
 name: atlas-quality
-description: Understand a software system and assess the quality impact of changes, with risk-based validation, living documentation and traceable evidence. Use for project QA onboarding, change or commit validation, regression planning and quality reviews, including AI-assisted and no-code projects. Do not activate for unrelated edits or claim continuous monitoring without an installed integration.
+description: Understand a software system, recommend a quality architecture and assess changes using available MCP, CLI, browser and test tools, with living documentation and traceable evidence. Use for QA onboarding, stack-specific test/tool/skill recommendations, change validation and regression planning, including AI-assisted and no-code projects. Do not activate for unrelated edits or claim continuous monitoring without an installed integration.
 ---
 
 # Atlas — Quality intelligence
@@ -12,6 +12,10 @@ Help the user understand the system and the evidence behind a quality decision. 
 Read repository instructions and existing architecture, requirements, tests, CI and quality records before creating new conventions. Inspect the actual diff and working tree. Agree on a baseline from the task or branch configuration; if unclear, distinguish uncommitted changes from the latest commit and do not guess a release range. Preserve unrelated changes.
 
 For onboarding, map components, critical journeys, data boundaries, integrations and available validation tools. Mark each statement observed, inferred or unknown, with source paths or platform evidence. For no-code systems, identify platform version, exports, workflows and permission rules; lack of source access is a coverage limitation.
+
+Discover the host's actual capabilities before planning execution: available connectors/MCP tools, terminal/CLI, browser control, test runners, scanners and any model/evaluation services. Consult [tool access](references/tool-access.md) for selection, verification and fallbacks. A named integration is not proof that it is connected, authenticated or authorized for the target.
+
+On initial assessment or when the user describes their system, use [quality architecture](references/quality-architecture.md) to propose a minimal coherent combination of test layers, frameworks, tools and relevant skills. Reuse what exists. Ask only for missing information that materially changes the recommendation; mark a proposal based solely on the user's description as provisional. Explain priorities, alternatives and what each recommendation detects before implementation.
 
 For a change, connect requirement → affected behavior → failure risk → suitable check. Inspect callers and consumers beyond changed lines. Account for configuration, schema, permissions, generated artifacts and deployment boundaries. Check whether prior assumptions still hold.
 
@@ -26,6 +30,8 @@ Prefer existing frameworks and conventions. Introduce dependencies, gates or pro
 - [Validation choices](references/validation.md): choose tests by change and system type; AI and no-code behavior; design and accessibility.
 - [Security and privacy](references/security-privacy.md): vulnerability tools, threat boundaries, scoped pentest and jurisdiction-sensitive research.
 - [Living records](references/records.md): project map, decisions, evidence, skipped checks and commit linkage.
+- [Tool access](references/tool-access.md): discover and choose MCP, CLI, browser, frameworks and AI service access.
+- [Quality architecture](references/quality-architecture.md): onboarding questions, selection criteria and a FastAPI/PostgreSQL SaaS example.
 
 ## Execute and interpret
 
@@ -46,5 +52,7 @@ Do not log secrets, personal payloads or full environment variables. Review capt
 ## Self-review and report
 
 Before concluding, check: did requirements and implementation diverge? Did an assertion test the requirement independently? Did a changed boundary lack coverage? Did new evidence invalidate the map? Did skipped, flaky or blocked work disappear from the verdict?
+
+Revisit tool and framework recommendations when a change introduces a new boundary, data store, runtime, AI provider or platform constraint. Update the capability inventory and rationale rather than rebuilding the whole architecture on every commit.
 
 Report the outcome first, then findings by impact with file/location or reproducible evidence. State checks executed, relevant observations, skipped/blocked work and remaining uncertainty. Use **validated within scope**, **issues found**, or **incomplete**; use incomplete for material unanswered checks. Explain concrete user impact. A scoped validation is never a guarantee of universal correctness, security or compliance.

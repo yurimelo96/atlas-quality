@@ -4,7 +4,7 @@
 
 <p align="center"><a href="#comece-aqui">Comece aqui</a> · <a href="#como-funciona">Como funciona</a> · <a href="#você-no-controle">Você no controle</a> · <a href="#contribua">Contribua</a> · <a href="https://github.com/yurimelo96">YuriMelo</a></p>
 
-<p align="center"><img alt="Licença MIT" src="https://img.shields.io/badge/license-MIT-a3e635?style=flat-square"> <img alt="Versão inicial 0.1.0" src="https://img.shields.io/badge/version-0.1.0-8b5cf6?style=flat-square"> <img alt="Idioma português e inglês" src="https://img.shields.io/badge/PT--BR%20%2B%20EN-instructions-22d3ee?style=flat-square"></p>
+<p align="center"><img alt="Licença MIT" src="https://img.shields.io/badge/license-MIT-a3e635?style=flat-square"> <img alt="Versão 0.2.0" src="https://img.shields.io/badge/version-0.2.0-8b5cf6?style=flat-square"> <img alt="Idioma português e inglês" src="https://img.shields.io/badge/PT--BR%20%2B%20EN-instructions-22d3ee?style=flat-square"></p>
 
 **Atlas é uma skill aberta criada por YuriMelo para acompanhar a qualidade durante o desenvolvimento.** Ela orienta um agente a compreender o projeto, avaliar mudanças, escolher verificações e manter documentação com rastreabilidade. Funciona como instruções para o agente, com um pequeno helper opcional em Python.
 
@@ -74,6 +74,45 @@ Você pode dizer “pule”, “adie”, “reduza o escopo” ou “use outro m
 
 Uma etapa pulada fica **pulada**. Uma ferramenta indisponível fica **bloqueada**. Nenhuma dessas situações se transforma em aprovação.
 
+## Arquitetura de qualidade para o seu sistema
+
+A partir do código disponível ou da sua descrição, Atlas cruza **produto + stack + riscos + acessos + capacidade de manutenção** para recomendar camadas de teste, frameworks, ferramentas e skills. Primeiro aproveita o que existe; pergunta apenas o que muda a decisão. Se tiver somente uma descrição, a recomendação fica marcada como provisória.
+
+```text
+Use $atlas-quality. Meu sistema é um SaaS em FastAPI e PostgreSQL,
+feito com ajuda de IA. Analise o que está disponível e recomende uma
+arquitetura de qualidade. Explique prioridades, ferramentas e skills,
+o que posso executar agora e o que depende de configuração.
+```
+
+Por exemplo, após confirmar as características do produto:
+
+| Contexto | Possível recomendação | Motivo |
+|---|---|---|
+| Regras Python e API FastAPI | pytest e cliente de teste compatível com o modelo síncrono/assíncrono | Verificar regras, contratos e falhas |
+| PostgreSQL | Banco isolado com fixtures e testes de migração | Verificar integridade e comportamento real do banco |
+| SaaS multi-tenant, se confirmado | Matriz de autorização entre organizações | Detectar acesso indevido a dados de outra conta |
+| Interface web, se existir | Suíte existente ou Playwright para jornadas críticas | Verificar integração entre camadas pela experiência do usuário |
+| Cobrança, se existir | Sandbox do provedor e testes de webhooks | Detectar duplicidade e eventos inválidos |
+| Modelo de IA dentro do produto, se existir | Conjunto de evals versionado | Avaliar comportamento não determinístico e ações do modelo |
+
+“Feito com IA” não significa que o produto tem uma funcionalidade de IA ou que seu código está defeituoso. A recomendação parte do comportamento esperado e das evidências.
+
+### MCP, CLI, browser, frameworks e IAs
+
+Atlas orienta o agente a descobrir e verificar **as capacidades realmente disponíveis no ambiente**, incluindo conectores/MCP, terminal, controle de navegador, frameworks, scanners, serviços de IA e CI. Para cada acesso necessário, registra estado, alvo, limites e alternativa.
+
+- **MCP/conector:** acesso a serviços e informações.
+- **CLI/CI:** execução reproduzível dos comandos do projeto.
+- **Browser:** exploração e observação de jornadas.
+- **Framework:** testes mantidos e repetíveis.
+- **Skill:** orientação especializada para conduzir o trabalho.
+- **IA/evals:** apoio à análise ou avaliação de funções de IA, conforme o caso.
+
+Essas peças podem trabalhar juntas. Atlas propõe a combinação adequada e separa **disponível**, **não configurado**, **autenticação necessária**, **bloqueado** e **desconhecido**. Não instala todos os frameworks, habilita credenciais ou promete compatibilidade universal. Skills externas são verificadas antes de serem sugeridas como candidatas; nomes de invocação dependem do catálogo real.
+
+Veja o [guia de acesso a ferramentas](skills/atlas-quality/references/tool-access.md) e o [exemplo completo de arquitetura FastAPI/PostgreSQL](skills/atlas-quality/references/quality-architecture.md).
+
 ## Qualidade em várias camadas
 
 | Área | Atuação orientada pela skill |
@@ -126,7 +165,7 @@ A direção visual une **YuriMelo + Atlas**, tipografia de terminal, mapa em pix
 
 ## Contribua
 
-O projeto começa em **0.1.0** e evolui com uso real. Bugs reproduzíveis, melhorias de acessibilidade, exemplos pequenos e traduções são bem-vindos. Consulte [CONTRIBUTING.md](CONTRIBUTING.md) e [SECURITY.md](SECURITY.md).
+O projeto está em **0.2.0** e evolui com uso real. Bugs reproduzíveis, melhorias de acessibilidade, exemplos pequenos e traduções são bem-vindos. Consulte [CONTRIBUTING.md](CONTRIBUTING.md) e [SECURITY.md](SECURITY.md).
 
 Para verificar o helper:
 

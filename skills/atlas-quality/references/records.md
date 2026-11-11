@@ -7,6 +7,7 @@ docs/quality/
   system-map.md    # boundaries, journeys, data, sources, unknowns
   decisions.md     # important rules and methods, reasons, applicability
   changes.md       # change → risk → validation → remaining work
+  quality-architecture.md  # when needed: accepted layers, tool access, skill choices and rationale
 .atlas/
   runs/<unique-id>/result.json
 ```
