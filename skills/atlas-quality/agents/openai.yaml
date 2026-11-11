@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atlas — Quality Intelligence"
+  short_description: "Qualidade explicável com evidências e autonomia"
+  default_prompt: "Use $atlas-quality para entender este projeto, avaliar os riscos da mudança e validar com evidências, explicando as decisões."
